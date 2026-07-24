@@ -11,8 +11,18 @@
   <link rel="stylesheet" href="./styles/common.css" />
   <link rel="stylesheet" href="./styles/revised.css" />
 </head>
-<body class="rv">
-  <div class="rv-nav" aria-hidden="true"><span></span><span></span><span></span></div>
+<body class="rv" id="top">
+  <button class="rv-nav" aria-label="menu"><span></span><span></span><span></span></button>
+  <nav class="rv-menu-overlay">
+    <ul>
+      <li><a href="#top">home</a></li>
+      <li><a href="#concept">concept</a></li>
+      <li><a href="#bodycare">body care</a></li>
+      <li><a href="#selftime">self time</a></li>
+      <li><a href="#about">about</a></li>
+      <li><a href="#reservation">reservation</a></li>
+    </ul>
+  </nav>
 
   <!-- ─── FV: 右寄せ大判写真 + 左下ロゴ (Figma: Revised — ambient) ─── -->
   <header class="rv-fv">
@@ -91,6 +101,7 @@
               <figcaption>
                 <span class="rv-staff__role rv-garamond">Therapist</span>
                 <span class="rv-staff__name">タカツキコノ</span>
+                <p class="rv-staff__bio">ダミーテキストです。鍼灸師。身体と心の声に耳を澄ませながら、その日のあなたに合わせたケアをお届けします。</p>
               </figcaption>
             </figure>
             <figure class="rv-staff__card">
@@ -98,6 +109,7 @@
               <figcaption>
                 <span class="rv-staff__role rv-garamond">Therapist / Founder</span>
                 <span class="rv-staff__name">松山友</span>
+                <p class="rv-staff__bio">ダミーテキストです。中目黒「she」創業者。心地よさの先にある、自分と向き合う時間のためにselfをひらきました。</p>
               </figcaption>
             </figure>
           </div>
@@ -111,7 +123,7 @@
               Higashiyama-ku,<br>
               Kyoto-shi, Kyoto
             </p>
-            <p class="rv-about__link"><a href="#">Google Map &gt;</a></p>
+            <p class="rv-about__link"><a href="https://maps.app.goo.gl/K3CQvVA6Fkbx9iMz5" target="_blank" rel="noopener">Google Map &gt;</a></p>
           </div>
           <div class="rv-about__block">
             <h3 class="rv-label rv-garamond">Group</h3>
@@ -120,7 +132,8 @@
               中目黒にある姉妹店です。<br>
               東京にお越しの際はぜひお立ち寄りください。
             </p>
-            <p class="rv-about__link"><a href="#">Google Map &gt;</a></p>
+            <p class="rv-about__link"><a href="https://maps.app.goo.gl/16nvGx9xh7p8VgAW7" target="_blank" rel="noopener">Google Map &gt;</a></p>
+            <p class="rv-about__link"><a href="https://www.instagram.com/she.nakameguro/?hl=ja" target="_blank" rel="noopener">Instagram &gt;</a></p>
           </div>
         </div>
       </div>
@@ -175,6 +188,22 @@
         cur = (cur + 1) % slides.length;
         slides[cur].classList.add('is-active');
       }, 3500);
+    })();
+
+    // ハンバーガーメニュー (全画面オーバーレイ)
+    (() => {
+      const btn = document.querySelector('.rv-nav');
+      const overlay = document.querySelector('.rv-menu-overlay');
+      btn.addEventListener('click', () => {
+        btn.classList.toggle('is-open');
+        overlay.classList.toggle('is-open');
+        document.body.classList.toggle('rv-noscroll');
+      });
+      overlay.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+        btn.classList.remove('is-open');
+        overlay.classList.remove('is-open');
+        document.body.classList.remove('rv-noscroll');
+      }));
     })();
   </script>
 </body>

@@ -34,12 +34,43 @@
   letter-spacing: 0.2em; color: var(--gray);
 }
 
-/* Figmaの三本線メニュー (装飾) */
+/* 三本線メニュー */
 .rv-nav {
-  position: absolute; z-index: 10; top: 33px; left: 23px;
+  appearance: none; border: none; background: none; padding: 0; margin: 0;
+  cursor: pointer;
+  position: fixed; z-index: 30; top: 33px; left: 23px;
   display: flex; flex-direction: column; gap: 8px;
 }
-.rv-nav span { display: block; width: 24px; height: 1px; background: var(--ink); }
+.rv-nav span {
+  display: block; width: 24px; height: 1px; background: var(--ink);
+  transition: transform 0.3s, opacity 0.3s;
+}
+.rv-nav.is-open span:nth-child(1) { transform: translateY(9px) rotate(-45deg); }
+.rv-nav.is-open span:nth-child(2) { opacity: 0; }
+.rv-nav.is-open span:nth-child(3) { transform: translateY(-9px) rotate(45deg); }
+
+/* 全画面オーバーレイナビ */
+.rv-menu-overlay {
+  position: fixed; inset: 0; z-index: 20;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(255, 255, 255, 0.94);
+  visibility: hidden; opacity: 0;
+  transition: opacity 0.35s, visibility 0.35s;
+}
+.rv-menu-overlay.is-open { visibility: visible; opacity: 1; }
+.rv-menu-overlay ul {
+  list-style: none; margin: 0; padding: 0;
+  display: flex; flex-direction: column; gap: 30px;
+  text-align: center;
+}
+.rv-menu-overlay a {
+  font-family: "EB Garamond", serif;
+  font-size: 20px; letter-spacing: 0.14em;
+  color: var(--ink); text-decoration: none;
+  transition: opacity 0.3s;
+}
+.rv-menu-overlay a:hover { opacity: 0.6; }
+.rv-noscroll { overflow: hidden; }
 
 /* 罫線 + EB Garamond 28px の見出し (Figma eyebrow) */
 .rv-eyebrow {
@@ -191,6 +222,11 @@
 .rv-staff__card figcaption { margin-top: 18px; }
 .rv-staff__role { display: block; font-size: 12px; color: var(--gray); letter-spacing: 0.14em; }
 .rv-staff__name { display: block; margin-top: 6px; font-size: 13px; letter-spacing: 0.2em; }
+.rv-staff__bio {
+  margin: 14px 0 0;
+  font-size: 12px; line-height: 2; letter-spacing: 0.08em;
+  color: var(--ink);
+}
 
 .rv-about__addr {
   margin: 26px 0 0;

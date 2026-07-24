@@ -1,0 +1,62 @@
+/* Reset & base */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: "Noto Serif JP", "游明朝", "Yu Mincho", serif;
+  font-weight: 300;
+  line-height: 1.9;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+img, picture, video { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; cursor: pointer; }
+h1, h2, h3, h4, p { margin: 0; font-weight: inherit; }
+
+/* Reveal animation utility (used by all plans) */
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity 1s ease-out, transform 1s ease-out; }
+.reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+/* Placeholder photo cells — visualize photo slots without real images */
+.ph {
+  display: flex; align-items: center; justify-content: center;
+  font-family: "Inter", sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(0,0,0,0.4);
+  background-size: cover;
+  background-position: center;
+}
+.ph::after { content: attr(data-label); }
+
+/* Plan-A placeholder palettes */
+.ph--water-a { background: linear-gradient(135deg, #cdd6d3 0%, #a8b3a4 50%, #8b9b96 100%); }
+.ph--smoke-a { background: linear-gradient(180deg, #ece8e2 0%, #d6d2cb 70%, #c5bfb6 100%); }
+.ph--oil-a   { background: linear-gradient(160deg, #efe9df 0%, #d6c8aa 60%, #b69968 100%); }
+.ph--needle-a{ background: linear-gradient(180deg, #f1ebe2 0%, #e1d7c5 100%); }
+
+/* Plan-B placeholder palettes (cooler ivory tones) */
+.ph--water-b { background: linear-gradient(160deg, #d8dfdb 0%, #b8c4be 50%, #9aaca5 100%); }
+.ph--smoke-b { background: linear-gradient(180deg, #f0ece4 0%, #d8d3c8 100%); }
+.ph--oil-b   { background: linear-gradient(135deg, #efe8d8 0%, #c5b896 100%); }
+.ph--needle-b{ background: linear-gradient(180deg, #ece4d6 0%, #d8cdb6 100%); }
+.ph--tea-b   { background: linear-gradient(135deg, #ebe5d5 0%, #c4c8a8 55%, #8a8568 100%); }
+
+/* Plan-C placeholder palettes (warmer amber tones) */
+.ph--hands-c { background: linear-gradient(120deg, #e8dac0 0%, #c8a978 60%, #8c6e45 100%); }
+.ph--smoke-c { background: linear-gradient(180deg, #4a3c2a 0%, #8c6e45 60%, #c8a978 100%); }
+.ph--moxa-c  { background: linear-gradient(160deg, #d8c1a0 0%, #a07f55 100%); }
+.ph--aroma-c { background: linear-gradient(160deg, #e8d8be 0%, #b89870 100%); }
+.ph--needle-c{ background: linear-gradient(160deg, #e0cdb0 0%, #9c7e58 100%); }
+
+/* ─── Real images (override gradient placeholders) ─── */
+.img--water    { background-image: url('../images/water-reflection.jpg'); }
+.img--smoke    { background-image: url('../images/smoke.png'); }
+.img--oil      { background-image: url('../images/oil.png'); }
+.img--needle   { background-image: url('../images/needle.png'); }
+.img--spend1   { background-image: url('../images/spend-time.png'); }
+.img--spend2   { background-image: url('../images/spend-time2.png'); }
+.img--spend3   { background-image: url('../images/spend-time3.png'); }
+/* When ph cell carries an img--* class, suppress the data-label overlay */
+[class*="img--"]::after { content: none; }

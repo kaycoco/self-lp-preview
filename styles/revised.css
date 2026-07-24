@@ -1,0 +1,342 @@
+/* ─────────────────────────────────────────────
+   Revised — ambient (Figma監修反映 / 実装版)
+   正: Figma「Revised — ambient PC / 1440」(2:2)
+       「Revised — ambient SP / 375」(54:2)
+   TraceのFV+Ma派生構成に、対角バランス調整・実写真差し替えを反映
+   ───────────────────────────────────────────── */
+
+.rv {
+  --ink: #3e3a39;
+  --gray: #808080;
+  --hair: #d9d5d0;
+  background: #fff;
+  color: var(--ink);
+  font-family: "游明朝", "Yu Mincho", "YuMincho", "Hiragino Mincho ProN", "Noto Serif JP", serif;
+  font-weight: 300;
+  font-size: 13px;
+  line-height: 2.2;
+  letter-spacing: 0.12em;
+  animation: rv-pagein 3s 1 forwards;
+  overflow-x: hidden;
+}
+@keyframes rv-pagein { from { opacity: 0; } to { opacity: 1; } }
+
+.rv a { color: inherit; text-decoration: none; }
+.rv figure { margin: 0; }
+.rv img { display: block; max-width: 100%; }
+.rv h2, .rv h3 { font-weight: 300; margin: 0; }
+
+.rv-garamond { font-family: "EB Garamond", serif; letter-spacing: 0.1em; }
+
+.rv .back-index {
+  position: fixed; z-index: 12; right: 16px; top: 14px;
+  font-family: "EB Garamond", serif; font-size: 11px;
+  letter-spacing: 0.2em; color: var(--gray);
+}
+
+/* Figmaの三本線メニュー (装飾) */
+.rv-nav {
+  position: absolute; z-index: 10; top: 33px; left: 23px;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.rv-nav span { display: block; width: 24px; height: 1px; background: var(--ink); }
+
+/* 罫線 + EB Garamond 28px の見出し (Figma eyebrow) */
+.rv-eyebrow {
+  display: flex; align-items: center; gap: 18px;
+  font-family: "EB Garamond", serif;
+  font-size: 28px; letter-spacing: 0.18em;
+  line-height: 2.2;
+  color: var(--ink);
+}
+.rv-eyebrow::before {
+  content: ''; display: block; flex: none;
+  width: 48px; height: 1px; background: var(--hair);
+}
+
+/* 写真・テキストのreveal (Trace方式 / 2s) */
+.rv .reveal { opacity: 0; transform: translateY(24px); transition: opacity 2s ease-out, transform 2s ease-out; }
+.rv .reveal.is-visible { opacity: 1; transform: translateY(0); }
+/* FV写真はフェードのみ (上昇エフェクトなし) */
+.rv .rv-fv__photo.reveal { transform: none; transition: opacity 2s ease-out; }
+.rv .rv-fv__photo.reveal.is-visible { transform: none; }
+
+/* SPのみ表示する改行 */
+.rv .sp-only { display: none; }
+
+/* ─── FV: 右寄せ大判 (360..1388/1440) + 左下ロゴ ─── */
+.rv-fv { position: relative; }
+.rv-fv__photo {
+  position: relative;
+  margin-left: 25%;
+  width: 71.4%;
+  aspect-ratio: 1028 / 672;
+  overflow: hidden;
+}
+.rv-fv__slide {
+  position: absolute; inset: 0;
+  background-position: center; background-size: cover;
+  opacity: 0; transition: opacity 2.5s;
+}
+.rv-fv__slide.is-active { opacity: 1; }
+.rv-fv__cap {
+  /* 写真左端(25%)から28px+テキスト幅ぶん離して重なりを防ぐ */
+  position: absolute; left: calc(25% - 64px); top: 32px;
+  margin: 0;
+  writing-mode: vertical-rl;
+  max-height: 480px;
+  font-family: "EB Garamond", serif;
+  font-size: 12px; letter-spacing: 0.08em; line-height: 12px;
+  color: var(--ink);
+}
+.rv-fv__logo {
+  position: absolute; left: 5.7%; bottom: 0;
+  width: 100px; mix-blend-mode: multiply;
+}
+
+/* ─── concept: 左に縦写真 / 右にテキスト / 右下に小写真 ─── */
+.rv-concept {
+  position: relative;
+  margin-top: 16.5vw;
+  padding-bottom: 6vw;
+}
+.rv .rv-concept__photo {
+  margin-left: 12.6%;
+  width: 37.5%;
+}
+.rv-concept__photo img { width: 100%; aspect-ratio: 540 / 840; object-fit: cover; }
+.rv-concept__txt {
+  position: absolute; left: 53.8%; top: 24.4vw;
+}
+.rv-concept__lead {
+  margin: 12px 0 0;
+  font-size: 16px; letter-spacing: 0.08em; line-height: 1.5;
+}
+.rv .rv-concept__sub {
+  position: absolute; left: 66.8%; top: 45.1vw;
+  width: 25%;
+}
+.rv-concept__sub img { width: 100%; aspect-ratio: 360 / 270; object-fit: cover; }
+
+/* ─── body care / self time 共通 ─── */
+.rv-care, .rv-time { margin-top: 300px; }
+.rv-care__head { margin-left: 11.25%; }
+.rv-care__ttl {
+  margin: 4px 0 0;
+  font-size: 21px; letter-spacing: 0.3em; line-height: 2.2;
+}
+
+/* body care */
+.rv .rv-care__kv {
+  width: 68%;
+  margin: 35px auto 0 0;
+}
+.rv-care__kv img { width: 100%; aspect-ratio: 980 / 613; object-fit: cover; }
+.rv-care__intro {
+  margin: 55px 0 0 11.25%;
+  max-width: 50%;
+  font-size: 13px; line-height: 2.6; letter-spacing: 0.12em;
+}
+.rv-img img { width: 100%; object-fit: cover; }
+.rv .rv-img--care1 { width: 58.3%; margin: 116px 0 0 31.25%; }
+.rv-img--care1 img { aspect-ratio: 840 / 540; }
+.rv .rv-img--care2 { width: 37.5%; margin: 150px 0 0 14.6%; }
+.rv-img--care2 img { aspect-ratio: 540 / 840; }
+.rv .rv-img--care3 { width: 48%; margin: 150px 0 0 41.6%; }
+.rv-img--care3 img { aspect-ratio: 691 / 461; }
+.rv .rv-img--care4 { width: 37.5%; margin: 150px 0 0 33.3%; }
+.rv-img--care4 img { aspect-ratio: 540 / 840; }
+
+/* self time */
+.rv .rv-time__kv {
+  width: 68%;
+  margin: 45px 0 0 auto;
+}
+.rv-time__kv img { width: 100%; aspect-ratio: 980 / 613; object-fit: cover; object-position: center 30%; }
+.rv-time__intro {
+  margin: 55px 0 0 31.9%;
+  max-width: 47.7%;
+  font-size: 13px; line-height: 2.6; letter-spacing: 0.12em;
+}
+.rv-time__band {
+  margin: 80px 6.9% 0 6.7%;
+  display: flex; align-items: flex-start; gap: 5.4%;
+}
+.rv-time__band img { width: 100%; object-fit: cover; }
+.rv-time__b-wide { width: 41.7%; }
+.rv-time__b-wide img { aspect-ratio: 4 / 3; }
+.rv-time__b-tall { width: 23.5%; }
+.rv-time__b-tall img { aspect-ratio: 3 / 4; }
+
+/* ─── about / reservation 共通 ─── */
+.rv-sec { margin-top: 300px; }
+.rv-sec__inner { margin: 0 18% 0 12.5%; }
+.rv-sec__inner--narrow { width: min(88%, 680px); margin: 0 auto; }
+
+/* about */
+.rv-about {
+  margin-top: 34px;
+  display: flex; justify-content: space-between; align-items: flex-start;
+}
+.rv-about__staff { width: 50.7%; }
+.rv-about__side { width: 30.5%; }
+.rv-label { font-size: 15px; letter-spacing: 0.16em; color: var(--ink); }
+.rv-staff {
+  margin-top: 36px;
+  display: flex; gap: 5.5%;
+}
+.rv-staff__card { width: 47.2%; margin: 0; }
+.rv-staff__photo { aspect-ratio: 3 / 4; overflow: hidden; }
+.rv-staff__photo img { width: 100%; height: 100%; object-fit: cover; }
+.rv-staff__card figcaption { margin-top: 18px; }
+.rv-staff__role { display: block; font-size: 12px; color: var(--gray); letter-spacing: 0.14em; }
+.rv-staff__name { display: block; margin-top: 6px; font-size: 13px; letter-spacing: 0.2em; }
+
+.rv-about__addr {
+  margin: 26px 0 0;
+  font-family: "EB Garamond", serif;
+  font-size: 15px; line-height: 1.9; letter-spacing: 0.08em;
+}
+.rv-about__link { margin: 26px 0 0; }
+.rv-about__link a {
+  font-family: "EB Garamond", serif;
+  font-size: 13px; letter-spacing: 0.12em;
+  border-bottom: 1px solid var(--hair);
+  padding-bottom: 3px;
+}
+.rv-about__block + .rv-about__block { margin-top: 88px; }
+.rv-about__she { margin-top: 20px; width: 66px; mix-blend-mode: multiply; }
+.rv-about__body { margin: 20px 0 0; font-size: 13px; line-height: 2.4; }
+
+/* reservation */
+.rv-resv__body { margin: 40px 0 0; font-size: 13px; line-height: 2.6; letter-spacing: 0.12em; }
+.rv-menu {
+  margin-top: 64px;
+  padding: 36px 0;
+  border-top: 1px solid var(--hair);
+  border-bottom: 1px solid var(--hair);
+}
+.rv-menu__course { margin: 0; font-size: 17px; letter-spacing: 0.08em; }
+.rv-menu__course span {
+  font-family: "游明朝", "Yu Mincho", "Noto Serif JP", serif;
+  font-size: 13px; color: var(--gray); margin-left: 10px; letter-spacing: 0.08em;
+}
+.rv-menu__price { margin: 10px 0 0; font-size: 20px; letter-spacing: 0.1em; }
+
+.rv-cta { margin-top: 64px; display: flex; flex-direction: column; gap: 28px; align-items: flex-start; }
+.rv-cta__btn { font-size: 13px; letter-spacing: 0.18em; }
+.rv-cta__btn span {
+  margin-left: 14px;
+  font-family: "EB Garamond", serif;
+  transition: margin-left 0.4s;
+}
+.rv-cta__btn:hover span { margin-left: 22px; }
+
+/* footer */
+.rv-footer {
+  margin-top: 240px;
+  padding: 0 0 40px;
+  text-align: center;
+}
+.rv-footer__logo { width: 80px; margin: 0 auto; mix-blend-mode: multiply; }
+.rv-footer__sns {
+  margin-top: 40px;
+  display: flex; justify-content: center; gap: 32px;
+  color: var(--ink);
+}
+.rv-footer__sns a { display: block; opacity: 0.85; transition: opacity 0.3s; }
+.rv-footer__sns a:hover { opacity: 0.5; }
+.rv-footer__copy {
+  margin: 40px 0 0;
+  font-size: 11px; letter-spacing: 0.24em; color: var(--gray);
+}
+
+/* ─── mobile: Figma SP / 375 ─── */
+@media screen and (max-width: 767px) {
+  .rv-nav { top: 24px; left: 17px; }
+
+  .rv .sp-only { display: inline; }
+
+  /* FV: 右フル寄せ写真 → 下にロゴ。キャプションは写真左に沿う縦組み */
+  .rv-fv { padding-bottom: 66px; }
+  .rv-fv__photo { margin: 120px 0 0 10.1%; width: 89.9%; aspect-ratio: 337 / 360; }
+  /* SPは横書きで写真上の白帯内に (.rv-fvは写真上端基準のためマイナスtopで白帯へ) */
+  .rv-fv__cap {
+    writing-mode: horizontal-tb;
+    left: 10.1%; top: -74px;
+    max-height: none;
+    font-size: 10px; line-height: 1.7;
+  }
+  .rv-fv__logo { left: 10.1%; bottom: 8px; width: 58px; }
+
+  /* concept: 左写真 → (重ねず28px空けて)右寄せ小写真 → 右寄せテキスト
+     Figma SP: 縦写真 x24/y820/232x361, 小写真 x207/y1209/144x108, eyebrow y1344 */
+  .rv-concept { margin-top: 74vw; padding-bottom: 0; display: flex; flex-direction: column; }
+  .rv .rv-concept__photo { order: 1; margin-left: 6.4%; width: 61.9%; }
+  .rv-concept__photo img { aspect-ratio: 232 / 361; }
+  .rv .rv-concept__sub {
+    position: static;
+    order: 2;
+    margin: 28px 6.4% 0 auto;
+    width: 38.4%;
+  }
+  .rv-concept__sub img { aspect-ratio: 144 / 108; }
+  .rv-concept__txt {
+    position: static;
+    order: 3;
+    margin: 27px 4% 0 0;
+    text-align: right;
+  }
+  .rv-concept__txt .rv-eyebrow { justify-content: flex-end; }
+  .rv-concept__lead { font-size: 13px; }
+
+  .rv-care, .rv-time { margin-top: 180px; }
+  .rv-care__head { margin-left: 6.4%; }
+  .rv-care__ttl { font-size: 17px; }
+  #bodycare .rv-care__ttl { line-height: 165%; }
+
+  .rv .rv-care__kv { width: 92%; margin-top: 37px; }
+  .rv-care__kv img { aspect-ratio: 345 / 216; }
+  .rv-care__intro { margin: 56px 6.4% 0; max-width: none; font-size: 12px; }
+
+  .rv .rv-img--care1 { width: 92%; margin: 72px 0 0 auto; }
+  .rv-img--care1 img { aspect-ratio: 345 / 222; }
+  .rv .rv-img--care2 { width: 66%; margin: 56px auto 0 6.4%; }
+  .rv .rv-img--care3 { width: 92%; margin: 56px auto 0 0; }
+  .rv-img--care3 img { aspect-ratio: 345 / 230; }
+  .rv .rv-img--care4 { width: 66%; margin: 56px 6.4% 0 auto; }
+
+  .rv .rv-time__kv { width: 92%; margin: 37px 0 0 auto; }
+  .rv-time__kv img { aspect-ratio: 345 / 216; }
+  .rv-time__intro { margin: 56px 6.4% 0; max-width: none; font-size: 12px; }
+
+  .rv-time__band { margin: 72px 2.4% 0 4.8%; gap: 2.4%; }
+  .rv-time__b-wide { width: 44.9%; }
+  .rv-time__b-tall { width: 25%; }
+
+  .rv-sec { margin-top: 180px; }
+  .rv-sec__inner { margin: 0 6.4%; }
+  .rv-sec__inner--narrow { width: 87.2%; }
+
+  .rv-about { display: block; }
+  .rv-about__staff { width: 100%; }
+  /* Figma SP: Staff/Access/Group = 16px, Therapist役職 = 12px */
+  .rv-label { font-size: 16px; }
+  .rv-staff { margin-top: 23px; gap: 5.7%; }
+  .rv-staff__card { width: 47.2%; }
+  .rv-staff__role { font-size: 12px; }
+  .rv-staff__name { font-size: 12px; }
+  .rv-about__side { width: 100%; margin-top: 62px; }
+
+  .rv-resv__body { margin-top: 30px; font-size: 12px; }
+  .rv-menu { margin-top: 22px; padding: 28px 0 22px; }
+  .rv-menu__course { font-size: 15px; }
+  .rv-menu__course span { font-size: 10.5px; }
+  .rv-menu__price { font-size: 17px; }
+  .rv-cta { margin-top: 52px; gap: 27px; }
+  .rv-cta__btn { font-size: 12px; }
+
+  .rv-footer { margin-top: 150px; padding-bottom: 60px; }
+  .rv-footer__logo { width: 40px; }
+  .rv-footer__sns { margin-top: 36px; }
+}

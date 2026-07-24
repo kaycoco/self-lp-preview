@@ -260,14 +260,15 @@
   /* FV: 右フル寄せ写真 → 下にロゴ。キャプションは写真左に沿う縦組み */
   .rv-fv { padding-bottom: 66px; }
   .rv-fv__photo { margin: 120px 0 0 10.1%; width: 89.9%; aspect-ratio: 337 / 360; }
-  /* SPは横書きで写真上の白帯内に (.rv-fvは写真上端基準のためマイナスtopで白帯へ) */
+  /* SPは写真の下・ロゴの右横 (Figma: logo x38/y509 w72, cap x119/y509 fs10 lh12) */
   .rv-fv__cap {
     writing-mode: horizontal-tb;
-    left: 10.1%; top: -74px;
+    left: calc(10.1% + 81px);
+    top: calc(96vw + 29px); /* 写真高(89.9vw×360/337)+29px */
     max-height: none;
-    font-size: 10px; line-height: 1.7;
+    font-size: 10px; line-height: 1.2;
   }
-  .rv-fv__logo { left: 10.1%; bottom: 8px; width: 58px; }
+  .rv-fv__logo { left: 10.1%; top: calc(96vw + 29px); bottom: auto; width: 72px; }
 
   /* concept: 左写真 → (重ねず28px空けて)右寄せ小写真 → 右寄せテキスト
      Figma SP: 縦写真 x24/y820/232x361, 小写真 x207/y1209/144x108, eyebrow y1344 */

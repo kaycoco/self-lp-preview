@@ -34,12 +34,21 @@
   letter-spacing: 0.2em; color: var(--gray);
 }
 
-/* 三本線メニュー */
+/* PCはSNSアイコン (B案) / SPはハンバーガー */
+.rv-fv-sns {
+  position: absolute; z-index: 10; top: 33px; left: 23px;
+  display: flex; flex-direction: column; align-items: center; gap: 16px;
+  color: var(--ink);
+}
+.rv-fv-sns a { display: block; opacity: 0.85; transition: opacity 0.3s; }
+.rv-fv-sns a:hover { opacity: 0.5; }
+
+/* 三本線メニュー (SPのみ) */
 .rv-nav {
   appearance: none; border: none; background: none; padding: 0; margin: 0;
   cursor: pointer;
   position: fixed; z-index: 30; top: 33px; left: 23px;
-  display: flex; flex-direction: column; gap: 8px;
+  display: none; flex-direction: column; gap: 8px;
 }
 .rv-nav span {
   display: block; width: 24px; height: 1px; background: var(--ink);
@@ -301,7 +310,9 @@
 
 /* ─── mobile: Figma SP / 375 ─── */
 @media screen and (max-width: 767px) {
-  .rv-nav { top: 24px; left: 17px; }
+  /* SPはハンバーガーを使う (SNSアイコンはPCのみ) */
+  .rv-fv-sns { display: none; }
+  .rv-nav { display: flex; top: 24px; left: 17px; }
 
   .rv .sp-only { display: inline; }
 

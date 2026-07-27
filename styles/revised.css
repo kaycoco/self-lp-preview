@@ -248,16 +248,28 @@
 .rv-resv__body { margin: 40px 0 0; font-size: 13px; line-height: 2.6; letter-spacing: 0.12em; }
 .rv-menu {
   margin-top: 64px;
-  padding: 36px 0;
   border-top: 1px solid var(--hair);
+}
+.rv-menu__item {
+  padding: 32px 0;
   border-bottom: 1px solid var(--hair);
 }
-.rv-menu__course { margin: 0; font-size: 17px; letter-spacing: 0.08em; }
-.rv-menu__course span {
-  font-family: "游明朝", "Yu Mincho", "Noto Serif JP", serif;
-  font-size: 13px; color: var(--gray); margin-left: 10px; letter-spacing: 0.08em;
+.rv-menu__head {
+  margin: 0;
+  display: flex; align-items: baseline; justify-content: space-between; gap: 24px;
 }
-.rv-menu__price { margin: 10px 0 0; font-size: 20px; letter-spacing: 0.1em; }
+.rv-menu__course { font-size: 20px; letter-spacing: 0.08em; }
+.rv-menu__course em { font-style: normal; font-size: 17px; margin-left: 8px; }
+.rv-menu__price { font-size: 18px; letter-spacing: 0.06em; white-space: nowrap; }
+.rv-menu__desc {
+  margin: 14px 0 0;
+  font-size: 12px; line-height: 2; letter-spacing: 0.08em;
+  color: var(--gray);
+}
+.rv-menu__note {
+  margin: 20px 0 0;
+  font-size: 11px; letter-spacing: 0.1em; color: var(--gray);
+}
 
 .rv-cta { margin-top: 64px; display: flex; flex-direction: column; gap: 28px; align-items: flex-start; }
 .rv-cta__btn { font-size: 13px; letter-spacing: 0.18em; }
@@ -366,10 +378,15 @@
   .rv-about__side { width: 100%; margin-top: 62px; }
 
   .rv-resv__body { margin-top: 30px; font-size: 12px; }
-  .rv-menu { margin-top: 22px; padding: 28px 0 22px; }
-  .rv-menu__course { font-size: 15px; }
-  .rv-menu__course span { font-size: 10.5px; }
-  .rv-menu__price { font-size: 17px; }
+  .rv-menu { margin-top: 22px; }
+  .rv-menu__item { padding: 24px 0; }
+  .rv-menu__head { gap: 12px; }
+  .rv-menu__course { font-size: 17px; }
+  .rv-menu__course em { font-size: 14px; margin-left: 6px; }
+  .rv-menu__price { font-size: 15px; }
+  .rv-menu__desc { margin-top: 10px; font-size: 11px; line-height: 1.9; }
+  .rv-menu__desc br { display: none; }
+  .rv-menu__note { font-size: 10px; }
   .rv-cta { margin-top: 52px; gap: 27px; }
   .rv-cta__btn { font-size: 12px; }
 

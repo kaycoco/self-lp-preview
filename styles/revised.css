@@ -129,9 +129,11 @@
   font-size: 12px; letter-spacing: 0.08em; line-height: 12px;
   color: var(--ink);
 }
+/* logo.svg は字面ぴったり。旧PNGは周囲に余白を含んでいたため
+   同じ見た目になるよう幅と位置を補正 (PNG内の字面比 = 幅67.3% / 左17.5% / 下31.8%) */
 .rv-fv__logo {
-  position: absolute; left: 5.7%; bottom: 0;
-  width: 100px; mix-blend-mode: multiply;
+  position: absolute; left: calc(5.7% + 17px); bottom: 24px;
+  width: 67px;
 }
 
 /* ─── concept: 左に縦写真 / 右にテキスト / 右下に小写真 ─── */
@@ -295,7 +297,7 @@
   padding: 0 0 40px;
   text-align: center;
 }
-.rv-footer__logo { width: 80px; margin: 0 auto; mix-blend-mode: multiply; }
+.rv-footer__logo { width: 54px; margin: 15px auto 14px; }
 .rv-footer__sns {
   margin-top: 40px;
   display: flex; justify-content: center; gap: 32px;
@@ -327,7 +329,7 @@
     max-height: none;
     font-size: 10px; line-height: 1.2;
   }
-  .rv-fv__logo { left: 10.1%; top: calc(96vw + 29px); bottom: auto; width: 72px; }
+  .rv-fv__logo { left: calc(10.1% + 13px); top: calc(96vw + 42px); bottom: auto; width: 48px; }
 
   /* concept: 左写真 → (重ねず28px空けて)右寄せ小写真 → 右寄せテキスト
      Figma SP: 縦写真 x24/y820/232x361, 小写真 x207/y1209/144x108, eyebrow y1344 */
@@ -402,6 +404,6 @@
   .rv-cta__btn { font-size: 12px; }
 
   .rv-footer { margin-top: 150px; padding-bottom: 60px; }
-  .rv-footer__logo { width: 40px; }
+  .rv-footer__logo { width: 27px; margin: 8px auto 10px; }
   .rv-footer__sns { margin-top: 36px; }
 }

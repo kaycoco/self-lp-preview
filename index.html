@@ -44,9 +44,14 @@
     <div class="rv-fv__photo reveal">
       <div class="rv-fv__slide is-active" style="background-image:url('./images/web/0176.jpg')"></div>
       <div class="rv-fv__slide" style="background-image:url('./images/web/fv02.jpg')"></div>
+      <!-- 3枚目以降は初回表示を軽くするため読み込みを遅延 (data-bg) -->
+      <div class="rv-fv__slide" data-bg="./images/web/fv03.jpg"></div>
+      <div class="rv-fv__slide" data-bg="./images/web/fv04.jpg"></div>
+      <div class="rv-fv__slide" data-bg="./images/web/fv05.jpg"></div>
+      <div class="rv-fv__slide" data-bg="./images/web/fv06.jpg"></div>
     </div>
     <p class="rv-fv__cap">Holistic Acupuncture<br>And Aromatherapy Salon<br>&mdash; Kyoto</p>
-    <img class="rv-fv__logo" src="./images/logo-bk.png" alt="self" />
+    <img class="rv-fv__logo" src="./images/logo.svg" alt="self" />
   </header>
 
   <!-- ─── concept: 縦位置ずらしの対角バランス ─── -->
@@ -193,7 +198,7 @@
 
   <!-- ─── footer ─── -->
   <footer class="rv-footer reveal">
-    <img class="rv-footer__logo" src="./images/logo-bk.png" alt="self" />
+    <img class="rv-footer__logo" src="./images/logo.svg" alt="self" />
     <div class="rv-footer__sns">
       <a href="https://www.instagram.com/self_kyoto/" target="_blank" rel="noopener" aria-label="Instagram">
         <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.4">
@@ -217,6 +222,15 @@
     (() => {
       const slides = document.querySelectorAll('.rv-fv__slide');
       if (slides.length < 2) return;
+
+      // 3枚目以降は初回描画後に読み込む (最初の1枚の表示を優先)
+      const lazy = () => document.querySelectorAll('.rv-fv__slide[data-bg]').forEach(el => {
+        el.style.backgroundImage = `url('${el.dataset.bg}')`;
+        el.removeAttribute('data-bg');
+      });
+      if (document.readyState === 'complete') lazy();
+      else window.addEventListener('load', lazy);
+
       let cur = 0;
       setInterval(() => {
         slides[cur].classList.remove('is-active');

@@ -321,6 +321,10 @@
   /* FV: 右フル寄せ写真 → 下にロゴ。キャプションは写真左に沿う縦組み */
   .rv-fv { padding-bottom: 66px; }
   .rv-fv__photo { margin: 120px 0 0 10.1%; width: 89.9%; aspect-ratio: 337 / 360; }
+  /* SPのみ トリミング調整:
+     fv02=施術中(右上の顔に寄せる) / fv03=ソファ(右の壁の切れ目を画面外へ) */
+  .rv-fv__slide.is-fv02 { background-size: auto 116%; background-position: 70% 12%; }
+  .rv-fv__slide.is-fv03 { background-position: 30% center; }
   /* SPは写真の下・ロゴの右横 (Figma: logo x38/y509 w72, cap x119/y509 fs10 lh12) */
   .rv-fv__cap {
     writing-mode: horizontal-tb;

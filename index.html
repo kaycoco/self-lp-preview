@@ -95,19 +95,10 @@
     <div class="rv-fv__photo reveal">
       <div class="rv-fv__slide is-active" style="background-image:url('./images/web/fv01.webp')"></div>
       <div class="rv-fv__slide is-fv02" style="background-image:url('./images/web/fv02.webp')"></div>
-      <!-- 3枚目は初回表示を軽くするため読み込みを遅延 (data-bg) -->
+      <!-- 3枚目以降は初回表示を軽くするため読み込みを遅延 (data-bg) -->
       <div class="rv-fv__slide" data-bg="./images/web/fv05.webp"></div>
+      <div class="rv-fv__slide" data-bg="./images/web/fv06.webp"></div>
     </div>
-    <script>
-      // 検証パネルのFV選択を、スライドショー起動前に反映する
-      try {
-        var _r = JSON.parse(localStorage.getItem('selfReview') || '{}');
-        if (_r.fv && _r.fv !== 'fv05') {
-          var _s = document.querySelectorAll('.rv-fv__slide');
-          _s[_s.length - 1].dataset.bg = './images/web/' + _r.fv + '.webp';
-        }
-      } catch (e) {}
-    </script>
     <p class="rv-fv__cap">Holistic Acupuncture<br>And Aromatherapy Salon<br>&mdash; Kyoto</p>
     <img class="rv-fv__logo" src="./images/logo.svg" alt="self" />
   </header>

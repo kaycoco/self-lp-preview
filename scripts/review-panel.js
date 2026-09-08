@@ -2,13 +2,6 @@
    右下のツマミで開閉。選択は localStorage に保存する。 */
 (function () {
   const OPTS = {
-    fv: {
-      label: 'FV 3枚目',
-      items: [
-        ['fv05', '柳の水辺（推奨）'],
-        ['fv06', '白鷺の川面'],
-      ],
-    },
     band: {
       label: 'self time 3枚組',
       items: [
@@ -24,11 +17,11 @@
         ['b', 'B 墨ベタ'],
         ['c', 'C ブランドカラー（オリーブ）'],
         ['d', 'D ブランドカラー（ベージュ）'],
-        ['e', 'E 白地のまま大きく＋影'],
+        ['e', 'E 白地のまま大きく'],
       ],
     },
   };
-  const DEF = { fv: 'fv05', band: 'A', btn: 'a' };
+  const DEF = { band: 'A', btn: 'a' };
   const state = Object.assign({}, DEF, JSON.parse(localStorage.getItem('selfReview') || '{}'));
 
   const BAND = {
@@ -38,7 +31,6 @@
   };
 
   function apply() {
-    // FVの3枚目はページ先頭のインラインスクリプトで反映済み（切替時はリロードする）
     // self time 3枚組
     const figs = document.querySelectorAll('.rv-time__band figure');
     (BAND[state.band] || BAND.A).forEach(([kind, name], i) => {
@@ -67,9 +59,6 @@
 
   box.addEventListener('change', e => {
     state[e.target.name] = e.target.value;
-    localStorage.setItem('selfReview', JSON.stringify(state));
-    // FVはスライドショーの初期化に関わるため読み込み直す
-    if (e.target.name === 'fv') { location.reload(); return; }
     apply();
     // ボタンの見た目を確認しやすいよう、下までスクロールしていない時は表示だけ出す
     const btn = document.querySelector('.rv-float');

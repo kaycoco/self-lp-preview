@@ -20,7 +20,7 @@
 .rv-float.v-c:hover { background: #3f4230; color: #fff; }
 .rv-float.v-d { background: #ceb99f; color: #fff; border-color: #ceb99f; }
 .rv-float.v-d:hover { background: #bda286; color: #fff; }
-.rv-float.v-e { padding: 19px 32px; font-size: 13px; box-shadow: 0 6px 24px rgba(62,58,57,.16); }
+.rv-float.v-e { padding: 19px 32px; font-size: 13px; }
 .rv-float.v-e:hover { background: var(--ink); color: #fff; }
 @media screen and (max-width: 767px) {
   .rv-float.v-e { padding: 16px 24px; font-size: 12px; }

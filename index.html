@@ -1,26 +1,77 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="ja" data-lang="ja">
 <head>
   <meta charset="utf-8" />
+  <!-- viewport-fit=cover: 下部の安全領域(ホームインジケーター)を env() で取得するために必要 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>self | 自分を見つめるための京都の鍼灸トリートメントサロン</title>
+  <meta name="description" content="東西線東山駅徒歩2分。鍼灸とオイルトリートメントによるボディケアと美容鍼で、心地よさと本格的な施術を同時に。京町家の静謐な空間で自分を見つめ大切にする時間を。" />
   <meta name="robots" content="noindex, nofollow" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>self — Revised (ambient)</title>
+  <link rel="canonical" href="https://selfkyoto.com/" />
+
+  <!-- SNSシェア時の表示 (OGP) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="self Kyoto" />
+  <meta property="og:locale" content="ja_JP" />
+  <meta property="og:url" content="https://selfkyoto.com/" />
+  <meta property="og:title" content="self | 自分を見つめるための京都の鍼灸サロン" />
+  <meta property="og:description" content="東西線東山駅徒歩2分。鍼灸とオイルトリートメントによるボディケアと美容鍼で、心地よさと本格的な施術を同時に。京町家の静謐な空間で自分を見つめ大切にする時間を。" />
+  <meta property="og:image" content="https://selfkyoto.com/og-image.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- favicon -->
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="./favicon-96.png" sizes="96x96" />
+  <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+  <meta name="theme-color" content="#ffffff" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;1,400&family=Noto+Serif+JP:wght@300&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./styles/common.css" />
-  <link rel="stylesheet" href="./styles/revised.css" />
+  <!-- ?v= はキャッシュ対策。style.css を更新したら数字を1つ増やす -->
+  <link rel="stylesheet" href="./styles/style.css?v=8" />
+
+  <!-- 表示言語の初期値を描画前に確定させる (切り替わりのチラつき防止)
+       優先順: URLの ?lang=en > 前回選んだ言語 > ブラウザの言語
+       ※ 常に日本語で開きたい場合は下の navigator.language の行を 'ja' に固定する -->
+  <script>
+    (function () {
+      var q = new URLSearchParams(location.search).get('lang');
+      var saved = null;
+      try { saved = localStorage.getItem('self-lang'); } catch (e) {}
+      var lang = (q === 'en' || q === 'ja') ? q
+        : (saved === 'en' || saved === 'ja') ? saved
+        : (navigator.language || '').toLowerCase().indexOf('ja') === 0 ? 'ja' : 'en';
+      document.documentElement.lang = lang;
+      document.documentElement.setAttribute('data-lang', lang);
+    })();
+  </script>
+  <link rel="stylesheet" href="./styles/review-panel.css" />
 </head>
 <body class="rv" id="top">
+  <!-- ─── 日英切り替え ─── -->
+  <div class="rv-lang" role="group" aria-label="Language / 言語">
+    <button type="button" class="rv-lang__btn" data-set-lang="ja" aria-pressed="true"><span>JA</span></button>
+    <span class="rv-lang__sep" aria-hidden="true">/</span>
+    <button type="button" class="rv-lang__btn" data-set-lang="en" aria-pressed="false"><span>EN</span></button>
+  </div>
   <button class="rv-nav" aria-label="menu"><span></span><span></span><span></span></button>
   <nav class="rv-menu-overlay">
     <ul>
-      <li><a href="#top">home</a></li>
-      <li><a href="#concept">concept</a></li>
-      <li><a href="#bodycare">body care</a></li>
-      <li><a href="#selftime">self time</a></li>
-      <li><a href="#about">about</a></li>
-      <li><a href="#reservation">reservation</a></li>
+      <li><a href="#top">Home</a></li>
+      <li><a href="#concept">Concept</a></li>
+      <li><a href="#bodycare">Body care</a></li>
+      <li><a href="#selftime">Self time</a></li>
+      <li><a href="#staff">Staff</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#reservation">Reservation</a></li>
+      <li class="rv-menu-overlay__lang">
+        <button type="button" data-set-lang="ja" aria-pressed="true"><span>JA</span></button>
+        <span aria-hidden="true">/</span>
+        <button type="button" data-set-lang="en" aria-pressed="false"><span>EN</span></button>
+      </li>
     </ul>
   </nav>
 
@@ -42,120 +93,169 @@
       </a>
     </div>
     <div class="rv-fv__photo reveal">
-      <div class="rv-fv__slide is-active" style="background-image:url('./images/web/fv01.jpg')"></div>
-      <div class="rv-fv__slide is-fv02" style="background-image:url('./images/web/fv02.jpg')"></div>
-      <!-- 3枚目以降は初回表示を軽くするため読み込みを遅延 (data-bg) -->
-      <div class="rv-fv__slide is-fv03" data-bg="./images/web/fv03.jpg"></div>
-      <div class="rv-fv__slide" data-bg="./images/web/fv05.jpg"></div>
-      <div class="rv-fv__slide" data-bg="./images/web/fv06.jpg"></div>
+      <div class="rv-fv__slide is-active" style="background-image:url('./images/web/fv01.webp')"></div>
+      <div class="rv-fv__slide is-fv02" style="background-image:url('./images/web/fv02.webp')"></div>
+      <!-- 3枚目は初回表示を軽くするため読み込みを遅延 (data-bg) -->
+      <div class="rv-fv__slide" data-bg="./images/web/fv05.webp"></div>
     </div>
+    <script>
+      // 検証パネルのFV選択を、スライドショー起動前に反映する
+      try {
+        var _r = JSON.parse(localStorage.getItem('selfReview') || '{}');
+        if (_r.fv && _r.fv !== 'fv05') {
+          var _s = document.querySelectorAll('.rv-fv__slide');
+          _s[_s.length - 1].dataset.bg = './images/web/' + _r.fv + '.webp';
+        }
+      } catch (e) {}
+    </script>
     <p class="rv-fv__cap">Holistic Acupuncture<br>And Aromatherapy Salon<br>&mdash; Kyoto</p>
     <img class="rv-fv__logo" src="./images/logo.svg" alt="self" />
   </header>
 
   <!-- ─── concept: 縦位置ずらしの対角バランス ─── -->
   <section class="rv-concept" id="concept">
-    <figure class="rv-concept__photo reveal"><img src="./images/web/0150.jpg" alt="" /></figure>
+    <figure class="rv-concept__photo reveal"><img src="./images/web/concept-new.webp" alt="" /></figure>
     <div class="rv-concept__txt reveal">
-      <div class="rv-eyebrow">Concept</div>
-      <p class="rv-concept__lead">selfは<br>自分と向き合って<br>ケアをする人のための場所です。</p>
+      <div data-lang="ja">
+        <p class="rv-concept__lead">ゆるむ、きづく、ととのう</p>
+        <p class="rv-concept__lead">selfは<br>自分と向き合って<br>ケアをする人のための場所です。</p>
+      </div>
+      <div data-lang="en">
+        <p class="rv-concept__lead">Soften, notice, come into balance.</p>
+        <p class="rv-concept__lead">self is a place to pause,<br>face yourself,<br>and care for who you are.</p>
+      </div>
     </div>
-    <figure class="rv-concept__sub reveal"><img src="./images/web/6988.jpg" alt="" /></figure>
+    <figure class="rv-concept__sub reveal"><img src="./images/web/6988.webp" alt="" /></figure>
   </section>
 
   <!-- ─── body care ─── -->
   <section class="rv-care" id="bodycare">
     <header class="rv-care__head reveal">
       <div class="rv-eyebrow">Body care</div>
-      <h2 class="rv-care__ttl">気持ちいいことは<br class="sp-only">体にいい。</h2>
+      <h2 class="rv-care__ttl"><span data-lang="ja">気持ちいいことは<br class="sp-only">体にいい。</span><span data-lang="en">What feels good,<br class="sp-only"> does good.</span></h2>
     </header>
 
-    <figure class="rv-care__kv reveal"><img src="./images/web/0045.jpg" alt="" /></figure>
+    <figure class="rv-care__kv reveal"><img src="./images/web/0045.webp" alt="" /></figure>
 
     <p class="rv-care__intro reveal">
-      selfのボディケアは鍼・灸・オイルトリートメントを組み合わせて行います。<br>
-      心地いい時間を通して身体を整えることで、本来の自分に気づき、向き合える状態をつくります。<br>
-      辛い時も、そうでなくてもぜひいらしてください。<br>はじめて鍼灸を体験されるかたも歓迎しています。
+      <span data-lang="ja">selfのボディケアは鍼・灸・オイルトリートメントを組み合わせて行います。<br>
+      心地いい時間を通して身体を整えることで、いまの自分の心と身体の状態に気づき、<br class="pc-only">改めて本来の自分と向き合える状態をつくります。<br>
+      どこかが辛い時も、もっと軽やかな自分で過ごしたい時も、ぜひいらしてください。<br>
+      はじめて鍼灸を体験される方も安心して受けていただけます。</span>
+      <span data-lang="en">self's body care combines acupuncture, moxibustion, and oil treatment.<br>
+      As your body settles into comfort, you begin to notice how your mind and body feel today — and find yourself ready to face who you really are.<br>
+      Come when something is weighing on you, and just as much when you simply want to feel lighter.<br>
+      First-time acupuncture guests are always welcome, and in good hands.</span>
     </p>
 
-    <figure class="rv-img rv-img--care1 reveal"><img src="./images/web/0011.jpg" alt="鍼" /></figure>
-    <figure class="rv-img rv-img--care2 reveal"><img src="./images/web/4566.jpg" alt="" /></figure>
-    <figure class="rv-img rv-img--care3 reveal"><img src="./images/web/6932-new.jpg" alt="灸" /></figure>
-    <figure class="rv-img rv-img--care4 reveal"><img src="./images/web/0110.jpg" alt="オイルトリートメント" /></figure>
+    <figure class="rv-img rv-img--care1 reveal"><img src="./images/web/0011.webp" alt="鍼" /></figure>
+    <figure class="rv-img rv-img--care2 reveal"><img src="./images/web/4566.webp" alt="" /></figure>
+    <figure class="rv-img rv-img--care3 reveal"><img src="./images/web/6932-new.webp" alt="灸" /></figure>
+    <figure class="rv-img rv-img--care4 reveal"><img src="./images/web/0110.webp" alt="オイルトリートメント" /></figure>
   </section>
 
   <!-- ─── self time ─── -->
   <section class="rv-time" id="selftime">
     <header class="rv-care__head reveal">
       <div class="rv-eyebrow">Self time</div>
-      <h2 class="rv-care__ttl">自分と向き合う時間</h2>
+      <h2 class="rv-care__ttl"><span data-lang="ja">自分と向き合う時間</span><span data-lang="en">Time to face yourself</span></h2>
     </header>
 
-    <figure class="rv-time__kv reveal"><img src="./images/web/4459.jpg" alt="" /></figure>
+    <figure class="rv-time__kv reveal"><img src="./images/web/4459.webp" alt="" /></figure>
 
-    <p class="rv-time__intro reveal">
-      鍼灸とオイルトリートメントで心地よく体が解けると<br>
-      本音に気づいたり、<br class="sp-only">新しい感情に出会うことができます。<br>
-      ケアの後は、お茶を飲みながら、美しいご自身と緩やかなセルフタイムをお過ごしください。
-    </p>
+    <p class="rv-time__intro reveal"><span data-lang="ja"><span class="nw">鍼灸とオイルトリートメントで</span><span class="nw">心地よく体が解けると</span><br>本音に気づいたり、<br class="sp-only">新しい感情に出会うことができます。<br><span class="nw">ケアの後は、</span><span class="nw">お茶を飲みながら、</span><span class="nw">美しいご自身と</span><span class="nw">緩やかなセルフタイムを</span><span class="nw">お過ごしください。</span></span><span data-lang="en">As acupuncture and oil treatment gently ease the body,<br class="pc-only">you may notice true feelings, or meet emotions you didn't expect.<br>Afterward, unwind with a cup of tea — a quiet self-time, just for you.</span></p>
 
     <div class="rv-time__band reveal">
-      <figure class="rv-time__b-wide"><img src="./images/web/0087.jpg" alt="" /></figure>
-      <figure class="rv-time__b-tall"><img src="./images/web/4444.jpg" alt="" /></figure>
-      <figure class="rv-time__b-tall"><img src="./images/web/4494.jpg" alt="" /></figure>
+      <figure class="rv-time__b-wide"><img src="./images/web/selftime-sofa.webp" alt="" /></figure>
+      <figure class="rv-time__b-tall"><img src="./images/web/4444.webp" alt="" /></figure>
+      <figure class="rv-time__b-tall"><img src="./images/web/4494.webp" alt="" /></figure>
     </div>
   </section>
 
-  <!-- ─── about ─── -->
+  <!-- ─── staff ─── -->
+  <section class="rv-sec rv-staff-sec" id="staff">
+    <div class="rv-sec__inner">
+      <div class="rv-eyebrow reveal">Staff</div>
+      <div class="rv-staff reveal">
+            <figure class="rv-staff__card">
+              <div class="rv-staff__photo"><img src="./images/staff/takatsuki.webp" alt="髙月胡希" /></div>
+              <figcaption>
+                <span class="rv-staff__role rv-garamond">Therapist</span>
+                <span class="rv-staff__name" data-lang="ja">髙月胡希</span>
+                <span class="rv-staff__name-en rv-garamond" data-lang="ja">Kono Takatsuki</span>
+                <span class="rv-staff__name rv-garamond" data-lang="en">Kono Takatsuki</span>
+                <a class="rv-staff__ig" href="https://www.instagram.com/self_kono" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2.5" y="2.5" width="19" height="19" rx="5.2"/><circle cx="12" cy="12" r="4.6"/><circle cx="17.6" cy="6.4" r="1.1" fill="currentColor" stroke="none"/></svg></a>
+              </figcaption>
+            </figure>
+            <figure class="rv-staff__card">
+              <div class="rv-staff__photo"><img src="./images/staff/matsuyama.webp" alt="松山友" /></div>
+              <figcaption>
+                <span class="rv-staff__role rv-garamond">Therapist / Founder</span>
+                <span class="rv-staff__name" data-lang="ja">松山友</span>
+                <span class="rv-staff__name-en rv-garamond" data-lang="ja">Yu Matsuyama</span>
+                <span class="rv-staff__name rv-garamond" data-lang="en">Yu Matsuyama</span>
+                <a class="rv-staff__ig" href="https://www.instagram.com/yu__she__" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2.5" y="2.5" width="19" height="19" rx="5.2"/><circle cx="12" cy="12" r="4.6"/><circle cx="17.6" cy="6.4" r="1.1" fill="currentColor" stroke="none"/></svg></a>
+              </figcaption>
+            </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── about (Access / Group) ─── -->
   <section class="rv-sec rv-about-sec" id="about">
     <div class="rv-sec__inner">
       <div class="rv-eyebrow reveal">About</div>
 
       <div class="rv-about reveal">
-        <div class="rv-about__staff">
-          <h3 class="rv-label rv-garamond">Staff</h3>
-          <div class="rv-staff">
-            <figure class="rv-staff__card">
-              <div class="rv-staff__photo"><img src="./images/figma/staff-1.jpg" alt="" /></div>
-              <figcaption>
-                <span class="rv-staff__role rv-garamond">Therapist</span>
-                <span class="rv-staff__name">タカツキコノ</span>
-                <p class="rv-staff__bio">ダミーテキストです。鍼灸師。身体と心の声に耳を澄ませながら、その日のあなたに合わせたケアをお届けします。</p>
-              </figcaption>
-            </figure>
-            <figure class="rv-staff__card">
-              <div class="rv-staff__photo"><img src="./images/figma/staff-2.jpg" alt="" /></div>
-              <figcaption>
-                <span class="rv-staff__role rv-garamond">Therapist / Founder</span>
-                <span class="rv-staff__name">松山友</span>
-                <p class="rv-staff__bio">ダミーテキストです。中目黒「she」創業者。心地よさの先にある、自分と向き合う時間のためにselfをひらきました。</p>
-              </figcaption>
-            </figure>
-          </div>
+        <div class="rv-about__block">
+          <h3 class="rv-label rv-garamond">Access</h3>
+          <p class="rv-about__addr"><span data-lang="ja">京都市東山区石泉院町403-3</span><span data-lang="en">403-3 Sekisenin-cho,<br>Higashiyama-ku, Kyoto</span></p>
+          <p class="rv-about__link"><a href="https://maps.app.goo.gl/pN7jzFPuT9hVQH5KA" target="_blank" rel="noopener">Google Map &gt;</a></p>
         </div>
-
-        <div class="rv-about__side">
-          <div class="rv-about__block">
-            <h3 class="rv-label rv-garamond">Access</h3>
-            <p class="rv-about__addr rv-garamond">
-              403-3 Sekisenin-cho,<br>
-              Higashiyama-ku,<br>
-              Kyoto-shi, Kyoto
-            </p>
-            <p class="rv-about__link"><a href="https://maps.app.goo.gl/pN7jzFPuT9hVQH5KA" target="_blank" rel="noopener">Google Map &gt;</a></p>
-          </div>
-          <div class="rv-about__block">
-            <h3 class="rv-label rv-garamond">Group</h3>
-            <img class="rv-about__she" src="./images/figma/she-logo.png" alt="she" />
-            <p class="rv-about__body">
-              中目黒にある姉妹店です。<br>
-              東京にお越しの際はぜひお立ち寄りください。
-            </p>
-            <p class="rv-about__link"><a href="https://maps.app.goo.gl/16nvGx9xh7p8VgAW7" target="_blank" rel="noopener">Google Map &gt;</a></p>
-            <p class="rv-about__link"><a href="https://www.instagram.com/she.nakameguro/?hl=ja" target="_blank" rel="noopener">Instagram &gt;</a></p>
-          </div>
+        <div class="rv-about__block">
+          <h3 class="rv-label rv-garamond">Group</h3>
+          <img class="rv-about__she" src="./images/figma/she-logo.webp" alt="she" />
+          <p class="rv-about__body">
+            <span data-lang="ja">中目黒にある姉妹店です。<br>
+            東京にお越しの際はぜひお立ち寄りください。</span>
+            <span data-lang="en">Our sister salon is in Nakameguro.<br>
+            Please stop by when you're in Tokyo.</span>
+          </p>
+          <p class="rv-about__link"><a href="https://maps.app.goo.gl/16nvGx9xh7p8VgAW7" target="_blank" rel="noopener">Google Map &gt;</a></p>
+          <p class="rv-about__link"><a href="https://www.instagram.com/she.nakameguro/?hl=ja" target="_blank" rel="noopener">Instagram &gt;</a></p>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- ─── menu ─── -->
+  <section class="rv-sec rv-menu-sec" id="menu">
+    <div class="rv-sec__inner rv-sec__inner--narrow">
+      <div class="rv-eyebrow reveal">Menu</div>
+      <div class="rv-menu reveal">
+        <div class="rv-menu__item">
+          <p class="rv-menu__head">
+            <span class="rv-menu__course rv-garamond">Focus <em>60min</em></span>
+            <span class="rv-menu__price rv-garamond">&yen;15,400</span>
+          </p>
+          <p class="rv-menu__desc"><span data-lang="ja">背中の鍼灸とオイルトリートメントで<br>気になる疲れや凝りを集中ケア</span><span data-lang="en">Focused care for fatigue and stiffness in the back,<br>with acupuncture and oil treatment.</span></p>
+        </div>
+        <div class="rv-menu__item">
+          <p class="rv-menu__head">
+            <span class="rv-menu__course rv-garamond">Balance <em>90min</em></span>
+            <span class="rv-menu__price rv-garamond">&yen;25,300</span>
+          </p>
+          <p class="rv-menu__desc"><span data-lang="ja">背中・脚の鍼灸とオイルトリートメントで<br>全身の巡りを整えるコース</span><span data-lang="en">Acupuncture and oil treatment for the back and legs,<br>to balance circulation through the whole body.</span></p>
+        </div>
+        <div class="rv-menu__item">
+          <p class="rv-menu__head">
+            <span class="rv-menu__course rv-garamond">Complete <em>120min</em></span>
+            <span class="rv-menu__price rv-garamond">&yen;30,800</span>
+          </p>
+          <p class="rv-menu__desc"><span data-lang="ja">からだもお肌も満たす<br>贅沢なトータルケアで全身を整える</span><span data-lang="en">A luxurious, full-body course that nourishes<br>both body and skin.</span></p>
+        </div>
+      </div>
+      <p class="rv-menu__note reveal"><span data-lang="ja">&#8251; 全て税込価格です<br>&#8251; 最新の情報・キャンペーン等の情報はインスタグラムをご参照ください</span><span data-lang="en">* All prices include tax.<br>* For the latest news and offers, please see our Instagram.</span></p>
     </div>
   </section>
 
@@ -163,34 +263,12 @@
   <section class="rv-sec rv-resv" id="reservation">
     <div class="rv-sec__inner rv-sec__inner--narrow">
       <div class="rv-eyebrow reveal">Reservation</div>
-      <p class="rv-resv__body reveal">ご予約は専用ページまたはLINEにてお問い合わせください。</p>
-      <div class="rv-menu reveal">
-        <div class="rv-menu__item">
-          <p class="rv-menu__head">
-            <span class="rv-menu__course rv-garamond">Focus <em>60min</em></span>
-            <span class="rv-menu__price rv-garamond">&yen;15,400</span>
-          </p>
-          <p class="rv-menu__desc">背中の鍼灸とオイルトリートメントで<br>気になる疲れや凝りを集中ケア</p>
-        </div>
-        <div class="rv-menu__item">
-          <p class="rv-menu__head">
-            <span class="rv-menu__course rv-garamond">Balance <em>90min</em></span>
-            <span class="rv-menu__price rv-garamond">&yen;25,300</span>
-          </p>
-          <p class="rv-menu__desc">背中・脚の鍼灸とオイルトリートメントで<br>全身の巡りを整えるコース</p>
-        </div>
-        <div class="rv-menu__item">
-          <p class="rv-menu__head">
-            <span class="rv-menu__course rv-garamond">Complete <em>120min</em></span>
-            <span class="rv-menu__price rv-garamond">&yen;30,800</span>
-          </p>
-          <p class="rv-menu__desc">からだもお肌も満たす<br>贅沢なトータルケアで全身を整える</p>
-        </div>
-      </div>
-      <p class="rv-menu__note reveal">&#8251; 全て税込価格です</p>
+      <p class="rv-resv__body reveal"><span data-lang="ja">ご予約は専用ページまたはLINEにてお問い合わせください。</span><span data-lang="en">For reservations, please reach us via our booking page or LINE.</span></p>
       <div class="rv-cta reveal">
-        <a class="rv-cta__btn" href="https://self-kyoto.square.site" target="_blank" rel="noopener">専用ページから予約する<span>&gt;</span></a>
-        <a class="rv-cta__btn" href="https://lin.ee/yZGDQLvM" target="_blank" rel="noopener">公式LINEから予約する<span>&gt;</span></a>
+        <a class="rv-cta__btn" data-lang="ja" href="https://self-kyoto.square.site" target="_blank" rel="noopener">専用ページから予約する<span>&gt;</span></a>
+        <a class="rv-cta__btn" data-lang="en" href="https://self-kyoto.square.site" target="_blank" rel="noopener">Book via the dedicated booking page<span>&gt;</span></a>
+        <a class="rv-cta__btn" data-lang="ja" href="https://lin.ee/yZGDQLvM" target="_blank" rel="noopener">公式LINEから予約する<span>&gt;</span></a>
+        <a class="rv-cta__btn" data-lang="en" href="https://lin.ee/yZGDQLvM" target="_blank" rel="noopener">Book via official LINE<span>&gt;</span></a>
       </div>
     </div>
   </section>
@@ -212,30 +290,109 @@
         </svg>
       </a>
     </div>
-    <p class="rv-footer__copy rv-garamond">&copy; self &mdash; kyoto, japan</p>
+    <p class="rv-footer__copy rv-garamond">&copy; self &mdash; Kyoto, Japan</p>
   </footer>
+
+  <!-- 追従の予約ボタン (FVを通過してから表示) -->
+  <a class="rv-float" href="https://self-kyoto.square.site" target="_blank" rel="noopener"><span data-lang="ja">予約する</span><span data-lang="en">Book</span></a>
 
   <script src="./scripts/reveal.js"></script>
   <script>
-    // FV crossfade slider (CSS opacity 2.5s + interval 3.5s)
+    // FV crossfade slider
     (() => {
-      const slides = document.querySelectorAll('.rv-fv__slide');
+      const slides = [...document.querySelectorAll('.rv-fv__slide')];
       if (slides.length < 2) return;
 
-      // 3枚目以降は初回描画後に読み込む (最初の1枚の表示を優先)
-      const lazy = () => document.querySelectorAll('.rv-fv__slide[data-bg]').forEach(el => {
-        el.style.backgroundImage = `url('${el.dataset.bg}')`;
-        el.removeAttribute('data-bg');
-      });
-      if (document.readyState === 'complete') lazy();
-      else window.addEventListener('load', lazy);
+      const INTERVAL = 3325;  // 切り替え間隔
+      const FADE     = 2375;  // クロスフェード時間 (CSS の transition と揃える)
 
-      let cur = 0;
-      setInterval(() => {
-        slides[cur].classList.remove('is-active');
-        cur = (cur + 1) % slides.length;
+      // 読み込みが終わった枚だけを順番に出す。
+      // (未読込の枚に切り替わると背景が空のまま数秒表示されてしまうため)
+      const ready = slides.map(el => !el.dataset.bg);
+      slides.forEach((el, i) => {
+        const src = el.dataset.bg;
+        if (!src) return;
+        const img = new Image();
+        img.onload = () => {
+          el.style.backgroundImage = `url('${src}')`;
+          el.removeAttribute('data-bg');
+          ready[i] = true;
+        };
+        img.src = src;
+      });
+
+      let cur = 0, z = 1, timer = null;
+
+      const step = () => {
+        // 読み込み済みの次の1枚を探す。無ければ今回は据え置き
+        let next = -1;
+        for (let n = 1; n < slides.length; n++) {
+          const i = (cur + n) % slides.length;
+          if (ready[i]) { next = i; break; }
+        }
+        if (next < 0) return;
+
+        // 新しい枚を上に重ねてフェードインさせ、下の枚は不透明のまま残す。
+        // (両方を同時に半透明にすると合成後の不透明度が下がり、白くかすむ)
+        const prev = cur;
+        cur = next;
+        slides[cur].style.zIndex = ++z;
         slides[cur].classList.add('is-active');
-      }, 3500);
+        setTimeout(() => slides[prev].classList.remove('is-active'), FADE + 80);
+      };
+
+      // 非表示のタブでは止める (復帰時にまとめて進むのを防ぐ)
+      const start = () => { if (!timer) timer = setInterval(step, INTERVAL); };
+      const stop  = () => { clearInterval(timer); timer = null; };
+      document.addEventListener('visibilitychange', () => (document.hidden ? stop() : start()));
+      start();
+    })();
+
+    // 追従の予約ボタン: FVを通過したら表示
+    (() => {
+      const btn = document.querySelector('.rv-float');
+      if (!btn) return;
+      const onScroll = () => {
+        btn.classList.toggle('is-shown', window.scrollY > window.innerHeight * 0.8);
+      };
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    })();
+
+    // 日英切り替え (ボタンは画面左上/右上とメニュー内の2箇所)
+    (() => {
+      const root = document.documentElement;
+      const head = {
+        ja: {
+          title: 'self | 自分を見つめるための京都の鍼灸トリートメントサロン',
+          desc: '東西線東山駅徒歩2分。鍼灸とオイルトリートメントによるボディケアと美容鍼で、心地よさと本格的な施術を同時に。京町家の静謐な空間で自分を見つめ大切にする時間を。'
+        },
+        en: {
+          title: 'self | Holistic Acupuncture and Aromatherapy Salon — Kyoto',
+          desc: 'Two minutes from Higashiyama Station. Acupuncture, moxibustion, and oil treatment in a quiet Kyoto machiya — a place to pause, face yourself, and care for who you are.'
+        }
+      };
+      const descEl = document.querySelector('meta[name="description"]');
+      const btns = document.querySelectorAll('[data-set-lang]');
+
+      const apply = (lang) => {
+        root.lang = lang;
+        root.setAttribute('data-lang', lang);
+        document.title = head[lang].title;
+        if (descEl) descEl.setAttribute('content', head[lang].desc);
+        btns.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.setLang === lang)));
+        try { localStorage.setItem('self-lang', lang); } catch (e) {}
+      };
+
+      btns.forEach((btn) => btn.addEventListener('click', () => {
+        apply(btn.dataset.setLang);
+        // メニュー内から切り替えた場合はオーバーレイを閉じる
+        document.querySelector('.rv-nav').classList.remove('is-open');
+        document.querySelector('.rv-menu-overlay').classList.remove('is-open');
+        document.body.classList.remove('rv-noscroll');
+      }));
+
+      apply(root.getAttribute('data-lang') === 'en' ? 'en' : 'ja');
     })();
 
     // ハンバーガーメニュー (全画面オーバーレイ)
@@ -254,5 +411,6 @@
       }));
     })();
   </script>
+  <script src="./scripts/review-panel.js"></script>
 </body>
 </html>

@@ -1,3 +1,26 @@
+/* self — production stylesheet
+   base reset + site styles */
+
+/* Reset & base */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: "Noto Serif JP", "游明朝", "Yu Mincho", serif;
+  font-weight: 300;
+  line-height: 1.9;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+img, picture, video { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; cursor: pointer; }
+h1, h2, h3, h4, p { margin: 0; font-weight: inherit; }
+
+/* Reveal animation utility (used by all plans) */
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity 1s ease-out, transform 1s ease-out; }
+.reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+
 /* ─────────────────────────────────────────────
    Revised — ambient (Figma監修反映 / 実装版)
    正: Figma「Revised — ambient PC / 1440」(2:2)
@@ -36,7 +59,8 @@
 
 /* PCはSNSアイコン (B案) / SPはハンバーガー */
 .rv-fv-sns {
-  position: absolute; z-index: 10; top: 33px; left: 23px;
+  /* 言語切り替え(左上)の下に置く */
+  position: absolute; z-index: 10; top: 76px; left: 23px;
   display: flex; flex-direction: column; align-items: center; gap: 16px;
   color: var(--ink);
 }
@@ -47,7 +71,7 @@
 .rv-nav {
   appearance: none; border: none; background: none; padding: 0; margin: 0;
   cursor: pointer;
-  position: fixed; z-index: 30; top: 33px; left: 23px;
+  position: fixed; z-index: 60; top: 33px; left: 23px; /* オーバーレイ(50)より上 = 閉じる×を押せる */
   display: none; flex-direction: column; gap: 8px;
 }
 .rv-nav span {
@@ -60,8 +84,10 @@
 
 /* 全画面オーバーレイナビ */
 .rv-menu-overlay {
-  position: fixed; inset: 0; z-index: 20;
+  position: fixed; inset: 0; z-index: 50; /* 追従の予約ボタン(40)より前面 */
   display: flex; align-items: center; justify-content: center;
+  align-items: safe center; /* 画面より縦に長くなっても上が切れない (非対応ブラウザは上行を使用) */
+  overflow-y: auto;
   background: rgba(255, 255, 255, 0.94);
   visibility: hidden; opacity: 0;
   transition: opacity 0.35s, visibility 0.35s;
@@ -103,6 +129,9 @@
 
 /* SPのみ表示する改行 */
 .rv .sp-only { display: none; }
+.rv .pc-only { display: inline; }
+/* 文節の途中で折り返さないための単位 (端末幅が狭い時のみ文節境界で折れる) */
+.rv .nw { display: inline-block; }
 
 /* ─── FV: 右寄せ大判 (360..1388/1440) + 左下ロゴ ─── */
 .rv-fv { position: relative; }
@@ -116,7 +145,7 @@
 .rv-fv__slide {
   position: absolute; inset: 0;
   background-position: center; background-size: cover;
-  opacity: 0; transition: opacity 2.5s;
+  opacity: 0; transition: opacity 2.375s;
 }
 .rv-fv__slide.is-active { opacity: 1; }
 .rv-fv__cap {
@@ -154,6 +183,8 @@
   margin: 12px 0 0;
   font-size: 16px; letter-spacing: 0.08em; line-height: 1.5;
 }
+/* 「ゆるむ、きづく、ととのう」と本文の間に空1行 */
+.rv-concept__lead + .rv-concept__lead { margin-top: 1.5em; }
 .rv .rv-concept__sub {
   position: absolute; left: 66.8%; top: 45.1vw;
   width: 25%;
@@ -212,27 +243,30 @@
 
 /* ─── about / reservation 共通 ─── */
 .rv-sec { margin-top: 300px; }
-.rv-sec__inner { margin: 0 18% 0 12.5%; }
+.rv-sec__inner { width: min(88%, 680px); margin: 0 auto; }
 .rv-sec__inner--narrow { width: min(88%, 680px); margin: 0 auto; }
 
 /* about */
 .rv-about {
   margin-top: 34px;
   display: flex; justify-content: space-between; align-items: flex-start;
+  gap: 14%;
 }
-.rv-about__staff { width: 50.7%; }
-.rv-about__side { width: 30.5%; }
+.rv-about__block { width: 43%; }
 .rv-label { font-size: 15px; letter-spacing: 0.16em; color: var(--ink); }
 .rv-staff {
-  margin-top: 36px;
-  display: flex; gap: 5.5%;
+  margin-top: 34px;
+  display: flex; gap: 5%;
 }
-.rv-staff__card { width: 47.2%; margin: 0; }
+.rv-staff__card { width: 47.5%; margin: 0; }
 .rv-staff__photo { aspect-ratio: 3 / 4; overflow: hidden; }
 .rv-staff__photo img { width: 100%; height: 100%; object-fit: cover; }
 .rv-staff__card figcaption { margin-top: 18px; }
 .rv-staff__role { display: block; font-size: 12px; color: var(--gray); letter-spacing: 0.14em; }
 .rv-staff__name { display: block; margin-top: 6px; font-size: 13px; letter-spacing: 0.2em; }
+.rv-staff__name-en { display: block; margin-top: 5px; font-size: 12px; letter-spacing: 0.1em; color: var(--gray); }
+.rv-staff__ig { display: inline-block; margin-top: 14px; color: var(--ink); opacity: 0.85; transition: opacity 0.3s; }
+.rv-staff__ig:hover { opacity: 0.5; }
 .rv-staff__bio {
   margin: 14px 0 0;
   font-size: 12px; line-height: 2; letter-spacing: 0.08em;
@@ -241,8 +275,7 @@
 
 .rv-about__addr {
   margin: 26px 0 0;
-  font-family: "EB Garamond", serif;
-  font-size: 15px; line-height: 1.9; letter-spacing: 0.08em;
+  font-size: 14px; line-height: 2.2; letter-spacing: 0.1em;
 }
 .rv-about__link { margin: 26px 0 0; }
 .rv-about__link a {
@@ -251,7 +284,7 @@
   border-bottom: 1px solid var(--hair);
   padding-bottom: 3px;
 }
-.rv-about__block + .rv-about__block { margin-top: 88px; }
+
 .rv-about__she { margin-top: 20px; width: 66px; mix-blend-mode: multiply; }
 .rv-about__body { margin: 20px 0 0; font-size: 13px; line-height: 2.4; }
 
@@ -279,7 +312,7 @@
 }
 .rv-menu__note {
   margin: 20px 0 0;
-  font-size: 11px; letter-spacing: 0.1em; color: var(--gray);
+  font-size: 11px; letter-spacing: 0.1em; line-height: 2; color: var(--gray);
 }
 
 .rv-cta { margin-top: 64px; display: flex; flex-direction: column; gap: 28px; align-items: flex-start; }
@@ -324,7 +357,6 @@
   /* SPのみ トリミング調整:
      fv02=施術中(右上の顔に寄せる) / fv03=ソファ(右の壁の切れ目を画面外へ) */
   .rv-fv__slide.is-fv02 { background-size: auto 116%; background-position: 70% 12%; }
-  .rv-fv__slide.is-fv03 { background-position: 30% center; }
   /* SPは写真の下・ロゴの右横 (Figma: logo x38/y509 w72, cap x119/y509 fs10 lh12) */
   .rv-fv__cap {
     writing-mode: horizontal-tb;
@@ -350,10 +382,9 @@
   .rv-concept__txt {
     position: static;
     order: 3;
-    margin: 27px 4% 0 0;
-    text-align: right;
+    margin: 27px 0 0 6.4%;
+    text-align: left;
   }
-  .rv-concept__txt .rv-eyebrow { justify-content: flex-end; }
   .rv-concept__lead { font-size: 13px; }
 
   .rv-care, .rv-time { margin-top: 180px; }
@@ -381,18 +412,21 @@
   .rv-time__b-tall { width: 25%; }
 
   .rv-sec { margin-top: 180px; }
-  .rv-sec__inner { margin: 0 6.4%; }
+  .rv-sec__inner { width: 87.2%; margin: 0 auto; }
   .rv-sec__inner--narrow { width: 87.2%; }
 
+  .rv .pc-only { display: none; }
+
   .rv-about { display: block; }
-  .rv-about__staff { width: 100%; }
+  .rv-about__block { width: 100%; }
+  .rv-about__block + .rv-about__block { margin-top: 62px; }
   /* Figma SP: Staff/Access/Group = 16px, Therapist役職 = 12px */
   .rv-label { font-size: 16px; }
   .rv-staff { margin-top: 23px; gap: 5.7%; }
   .rv-staff__card { width: 47.2%; }
+  .rv-staff__name-en { font-size: 11px; }
   .rv-staff__role { font-size: 12px; }
   .rv-staff__name { font-size: 12px; }
-  .rv-about__side { width: 100%; margin-top: 62px; }
 
   .rv-resv__body { margin-top: 30px; font-size: 12px; }
   .rv-menu { margin-top: 22px; }
@@ -410,4 +444,162 @@
   .rv-footer { margin-top: 150px; padding-bottom: 60px; }
   .rv-footer__logo { width: 27px; margin: 8px auto 10px; }
   .rv-footer__sns { margin-top: 36px; }
+}
+
+
+/* ─── タブレット幅の調整 ───
+   本文の幅は % 指定(1440px想定)のため、768〜1100px では狭くなりすぎて
+   文の途中で折り返してしまう。この範囲だけ右マージン指定に切り替えて幅を確保する。 */
+@media screen and (min-width: 768px) and (max-width: 1100px) {
+  .rv-time__intro { max-width: none; margin-right: 6%; }
+  .rv-care__intro { max-width: none; margin-right: 8%; }
+}
+
+/* ─── 追従の予約ボタン ─── */
+.rv-float {
+  /* bottom は下部の安全領域(ホームインジケーター)ぶんを加算する。
+     env() 非対応・不要な環境では 0 になるので通常表示は変わらない。 */
+  position: fixed; z-index: 40; right: 28px;
+  bottom: calc(28px + env(safe-area-inset-bottom, 0px));
+  padding: 15px 24px;
+  background: #fff; border: 1px solid var(--ink); color: var(--ink);
+  font-size: 12px; letter-spacing: 0.18em; line-height: 1;
+  opacity: 0; visibility: hidden; transform: translateY(10px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out, visibility 0.6s, background 0.3s, color 0.3s;
+}
+.rv-float.is-shown { opacity: 1; visibility: visible; transform: none; }
+.rv-float:hover { background: var(--ink); color: #fff; }
+
+@media screen and (max-width: 767px) {
+  /* SP: ツールバー表示中は20px、スクロールでツールバーが隠れたときは
+     env() が効いてホームインジケーターぶん(約34px)を自動で足す */
+  .rv-float {
+    right: 16px;
+    bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+    padding: 13px 18px; font-size: 11px; letter-spacing: 0.14em;
+  }
+}
+
+
+/* ─────────────────────────────────────────────
+   日英切り替え (JP / EN)
+   htmlタグの data-lang="ja" | "en" で表示を出し分ける。
+   本文は  <span data-lang="ja">日本語</span><span data-lang="en">English</span>
+   のように2言語ぶん書いておき、CSSで片方だけを表示する。
+   ───────────────────────────────────────────── */
+html[data-lang="ja"] [data-lang="en"],
+html[data-lang="en"] [data-lang="ja"] { display: none; }
+
+/* 切り替えボタン: PCは左上(SNSアイコンの上) / SPは右上
+   文字は小さいままで、paddingで当たり判定だけを 40px 前後に広げている。
+   位置指定(top/left)がpaddingぶん内側にずれているのはそのため。 */
+.rv-lang {
+  position: absolute; z-index: 12; top: 16px; left: 13px;
+  display: flex; align-items: center; gap: 0;
+  font-family: "EB Garamond", serif;
+  font-size: 12px; letter-spacing: 0.16em; line-height: 1;
+  transition: opacity 0.3s;
+}
+.rv-lang__btn {
+  appearance: none; -webkit-appearance: none;
+  border: 0; background: none; margin: 0;
+  padding: 14px 10px;
+  font: inherit; letter-spacing: inherit;
+  color: var(--gray); transition: color 0.3s;
+  -webkit-tap-highlight-color: transparent;
+}
+/* 選択中は色を濃く + 細い下線 (Google Map > リンクと同じ罫線色) */
+.rv-lang__btn > span {
+  display: inline-block; padding-bottom: 3px;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.3s;
+}
+.rv-lang__btn:hover { color: var(--ink); }
+/* マウス操作では枠を出さず、キーボード操作のときだけ控えめな枠を出す */
+.rv-lang__btn:focus { outline: none; }
+.rv-lang__btn:focus-visible { outline: 1px solid var(--hair); outline-offset: 2px; }
+.rv-lang__btn[aria-pressed="true"] { color: var(--ink); }
+.rv-lang__btn[aria-pressed="true"] > span { border-bottom-color: var(--hair); }
+.rv-lang__sep { color: var(--hair); }
+/* メニューを開いている間は隠す (オーバーレイ越しに透けるのを防ぐ) */
+.rv-noscroll .rv-lang { opacity: 0; pointer-events: none; }
+.rv-noscroll .rv-float { opacity: 0; visibility: hidden; pointer-events: none; }
+
+/* オーバーレイメニュー内の切り替え (SP) */
+/* メニュー内の切り替え: 文字色は本文と同じ ink、サイズを小さくして
+   メニュー項目(20px)と区別する。選択中は ink の下線で示す。 */
+.rv-menu-overlay__lang {
+  margin-top: 4px;
+  display: flex; align-items: center; justify-content: center; gap: 0;
+  font-family: "EB Garamond", "游明朝", "Yu Mincho", serif;
+  font-size: 13px; letter-spacing: 0.18em;
+}
+.rv-menu-overlay__lang button {
+  appearance: none; -webkit-appearance: none;
+  border: 0; background: none; margin: 0;
+  padding: 14px 16px;
+  font: inherit; letter-spacing: inherit;
+  color: var(--ink);
+  -webkit-tap-highlight-color: transparent;
+}
+.rv-menu-overlay__lang button > span {
+  display: inline-block; padding-bottom: 4px;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.3s;
+}
+.rv-menu-overlay__lang button:hover > span { border-bottom-color: var(--hair); }
+.rv-menu-overlay__lang button:focus { outline: none; }
+.rv-menu-overlay__lang button:focus-visible { outline: 1px solid var(--hair); outline-offset: 2px; }
+.rv-menu-overlay__lang button[aria-pressed="true"] > span { border-bottom-color: var(--ink); }
+/* 区切りの「/」だけ。直下のspanに限定しないとボタン内のラベルにも当たる */
+.rv-menu-overlay__lang > span { color: var(--gray); }
+
+/* 英語本文の組み: 欧文はEB Garamond / 字間と行間を欧文向けに詰める */
+.rv [data-lang="en"] {
+  font-family: "EB Garamond", "游明朝", "Yu Mincho", serif;
+  letter-spacing: 0.02em;
+}
+html[data-lang="en"] .rv-concept__lead { font-size: 18px; line-height: 1.7; letter-spacing: 0.02em; }
+html[data-lang="en"] .rv-care__ttl { font-size: 25px; line-height: 1.8; letter-spacing: 0.06em; }
+html[data-lang="en"] .rv-care__intro,
+html[data-lang="en"] .rv-time__intro { font-size: 15px; line-height: 2.1; letter-spacing: 0.02em; }
+html[data-lang="en"] .rv-about__addr { font-size: 15px; line-height: 1.9; }
+html[data-lang="en"] .rv-about__body { font-size: 14px; line-height: 2; }
+html[data-lang="en"] .rv-resv__body { font-size: 15px; line-height: 2.1; letter-spacing: 0.02em; }
+html[data-lang="en"] .rv-staff__name { font-size: 14px; letter-spacing: 0.08em; }
+html[data-lang="en"] .rv-menu__desc { font-size: 13px; line-height: 1.9; }
+html[data-lang="en"] .rv-menu__note { font-size: 12px; }
+html[data-lang="en"] .rv-cta__btn { font-size: 14px; letter-spacing: 0.1em; }
+html[data-lang="en"] .rv-float { font-size: 12px; letter-spacing: 0.12em; }
+
+@media screen and (max-width: 767px) {
+  .rv-lang { top: 8px; left: auto; right: 7px; }
+
+  html[data-lang="en"] .rv-concept__lead { font-size: 15px; }
+  html[data-lang="en"] .rv-care__ttl { font-size: 20px; line-height: 1.6; }
+  html[data-lang="en"] .rv-care__intro,
+  html[data-lang="en"] .rv-time__intro { font-size: 13.5px; line-height: 1.95; }
+  html[data-lang="en"] .rv-about__addr { font-size: 14px; }
+  html[data-lang="en"] .rv-about__body { font-size: 13px; }
+  html[data-lang="en"] .rv-resv__body { font-size: 13.5px; }
+  html[data-lang="en"] .rv-staff__name { font-size: 13px; }
+  html[data-lang="en"] .rv-menu__desc { font-size: 12px; }
+  html[data-lang="en"] .rv-menu__note { font-size: 11px; }
+  html[data-lang="en"] .rv-cta__btn { font-size: 13px; }
+  html[data-lang="en"] .rv-float { font-size: 11px; }
+}
+
+/* iPhone SE など縦の短い端末: メニュー項目の間隔を詰めて上下に余白を残す */
+@media screen and (max-height: 740px) {
+  .rv-menu-overlay ul { gap: 20px; }
+  .rv-menu-overlay__lang button { padding: 11px 16px; }
+}
+
+/* 横向き時にノッチへ潜り込まないよう左右の安全領域を確保
+   (viewport-fit=cover の副作用対策。縦向き・PCでは env() が0なので影響なし) */
+@media screen and (orientation: landscape) {
+  .rv {
+    padding-left: env(safe-area-inset-left, 0px);
+    padding-right: env(safe-area-inset-right, 0px);
+  }
 }

@@ -32,6 +32,9 @@ h1, h2, h3, h4, p { margin: 0; font-weight: inherit; }
   --ink: #3e3a39;
   --gray: #808080;
   --hair: #d9d5d0;
+  /* ブランドカラー(オリーブ)。予約ボタンに使用 */
+  --olive: #4f533c;
+  --olive-dark: #3f4230;
   background: #fff;
   color: var(--ink);
   font-family: "游明朝", "Yu Mincho", "YuMincho", "Hiragino Mincho ProN", "Noto Serif JP", serif;
@@ -462,13 +465,15 @@ h1, h2, h3, h4, p { margin: 0; font-weight: inherit; }
   position: fixed; z-index: 40; right: 28px;
   bottom: calc(28px + env(safe-area-inset-bottom, 0px));
   padding: 15px 24px;
-  background: #fff; border: 1px solid var(--ink); color: var(--ink);
+  background: var(--olive); border: 1px solid var(--olive);
   font-size: 12px; letter-spacing: 0.18em; line-height: 1;
   opacity: 0; visibility: hidden; transform: translateY(10px);
-  transition: opacity 0.6s ease-out, transform 0.6s ease-out, visibility 0.6s, background 0.3s, color 0.3s;
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out, visibility 0.6s, background 0.3s, border-color 0.3s, color 0.3s;
 }
 .rv-float.is-shown { opacity: 1; visibility: visible; transform: none; }
-.rv-float:hover { background: var(--ink); color: #fff; }
+.rv-float:hover { background: var(--olive-dark); border-color: var(--olive-dark); }
+/* 文字色だけは .rv a { color: inherit } に負けるため、a を含めて特異度を上げる */
+.rv a.rv-float { color: #fff; }
 
 @media screen and (max-width: 767px) {
   /* SP: ツールバー表示中は20px、スクロールでツールバーが隠れたときは
